@@ -26,6 +26,13 @@ const App = () => {
   // ref를 사용하여 변수 담기
   const nextId = useRef(4);
 
+  const onRemove = useCallback(
+    (id) => {
+      setTodos(todos.filter((todo) => todo.id !== id));
+    },
+    [todos],
+  );
+
   const onInsert = useCallback(
     (text) => {
       const todo = {
@@ -42,7 +49,7 @@ const App = () => {
   return (
     <TodoTemplate>
       <TodoInsert onInsert={onInsert} />
-      <TodoList todos={todos} />
+      <TodoList todos={todos} onRemove={onRemove} />
     </TodoTemplate>
   );
 };
